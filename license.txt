@@ -1,0 +1,3 @@
+CoroEval is licensed under the GNU GPL. See gpl.txt for the license text.
+
+The WildMagic 3 library is licensed under the Wild Magic License (Boost License). The parts necessary to compile CoroEval are included in the wm3 directory, as this version is no longer available online.
