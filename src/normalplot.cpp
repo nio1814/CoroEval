@@ -49,8 +49,8 @@
 
 
 NormalPlot::NormalPlot(QWidget *parent) :
-	m_settings(Settings::getSettings()),
-    QDialog(parent)
+    QDialog(parent),
+    m_settings(Settings::getSettings())
 {
     m_curNormal = 0;
 
@@ -168,7 +168,6 @@ void NormalPlot::saveData()
 
 	MeasurementPoint* p = m_measurements[m_pos];
 	const std::vector<float>& values = p->getNormal(m_curNormal);
-	const Interval& pos = p->getCenterInterval(m_curNormal);
 
 	double center = static_cast<double>(values.size()) / 2.0;
 

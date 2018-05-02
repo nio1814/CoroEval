@@ -192,7 +192,7 @@ bool Settings::load(const QString& filename) {
 					QMessageBox::warning(NULL, "Warning", param.append(" is not a valid value for ").append(minVesselDiameterName));
 			} else if (qLine.startsWith(doPointCheckName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - doPointCheckName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {
@@ -209,7 +209,7 @@ bool Settings::load(const QString& filename) {
 					QMessageBox::warning(NULL, "Warning", param.append(" is not a valid value for ").append(doPointCheckName));
 			} else if (qLine.startsWith(doNormalCheckName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - doNormalCheckName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {
@@ -226,7 +226,7 @@ bool Settings::load(const QString& filename) {
 					QMessageBox::warning(NULL, "Warning", param.append(" is not a valid value for ").append(doNormalCheckName));
 			} else if (qLine.startsWith(useEllipseName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - useEllipseName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {
@@ -251,7 +251,7 @@ bool Settings::load(const QString& filename) {
 					QMessageBox::warning(NULL, "Warning", param.append(" is not a valid value for ").append(sharpnessEvalIntervalName));
 			} else if (qLine.startsWith(showMIPName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - showMIPName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {
@@ -268,7 +268,7 @@ bool Settings::load(const QString& filename) {
 					QMessageBox::warning(NULL, "Warning", param.append(" is not a valid value for ").append(showMIPName));
 			} else if (qLine.startsWith(showNormalsName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - showNormalsName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {
@@ -277,7 +277,7 @@ bool Settings::load(const QString& filename) {
 				} else if ((param.compare("false", Qt::CaseInsensitive) == 0) || (param.compare("0", Qt::CaseInsensitive) == 0) || (param.compare("no", Qt::CaseInsensitive) == 0)) {
 					i = false;
 					ok = true;
-				}
+        }
 
 				if (ok)
 					m_showNormals = i;
@@ -287,7 +287,7 @@ bool Settings::load(const QString& filename) {
 
 			} else if (qLine.startsWith(rememberDirName, Qt::CaseInsensitive)) {
 				QString param = qLine.right(qLine.size() - rememberDirName.size()).trimmed();
-				bool ok;
+        bool ok = false;
 				bool i;
 
 				if ((param.compare("true", Qt::CaseInsensitive) == 0) || (param.compare("1", Qt::CaseInsensitive) == 0) || (param.compare("yes", Qt::CaseInsensitive) == 0)) {

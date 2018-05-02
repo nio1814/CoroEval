@@ -37,8 +37,8 @@
 
 
 EvaluationDialog::EvaluationDialog(QWidget *parent) :
-	m_settings(Settings::getSettings()),
     QDialog(parent),
+    m_settings(Settings::getSettings()),
     ui(new Ui::EvaluationDialog)
 {
     m_startPos = 1;

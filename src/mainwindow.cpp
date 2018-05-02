@@ -1,17 +1,17 @@
-/* 
+/*
  * CoroEval
  *
  * An evaluation tool for coronary artery reconstructions.
  *
- * Copyright © 2014:
+ * Copyright Â© 2014:
  *
- * Christoph Forman, Universität Erlangen-Nürnberg
+ * Christoph Forman, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * christoph.forman@cs.fau.de
  *
- * Chris Schwemmer, Universität Erlangen-Nürnberg
+ * Chris Schwemmer, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * chris.schwemmer@cs.fau.de
  *
- * Jens Wetzl, Universität Erlangen-Nürnberg
+ * Jens Wetzl, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * jens.wetzl@cs.fau.de
  *
  * CoroEval is free software: you can redistribute it and/or modify
@@ -61,8 +61,8 @@
 
 
 MainWindow::MainWindow(QWidget *parent) :
-	m_settings(Settings::getSettings()),
     QMainWindow(parent),
+    m_settings(Settings::getSettings()),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->viewer, SIGNAL(updateProfile()), this, SLOT(updateMeasurementPoints()));
     connect(ui->profile, SIGNAL(positionChanged(size_t)), this, SLOT(updatePosition(size_t)));
 	connect(ui->profile, SIGNAL(measurementsEdit(size_t)), this, SLOT(measurementsEdit(size_t)));
-    
+
 	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(loadFile()));
 	connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 	connect(ui->actionPoints, SIGNAL(triggered()), ui->viewer, SLOT(showPointsDialog()));
@@ -143,7 +143,7 @@ void MainWindow::loadFile()
 	dialog.setLastLoadDir(m_lastLoadDir);
 
     dialog.exec();
-	
+
 	disconnect(this, SLOT(clearData()));
     disconnect(this, SLOT(setData(Data*)));
     disconnect(this, SLOT(setWindowTitle(QString)));
@@ -225,20 +225,20 @@ void MainWindow::updateMeasurementPoints()
 	// Median-filter diameters
 	MPFilter::median(m_measurements, 3);
 	//MPFilter::gauss(m_measurements, 3, 0.5);
-    
+
 	// Create lengthwise profile of the coronary
 	size_t width = (static_cast<double>(m_settings.getSizeNormal()) / m_data->getVoxelSize()) * 2 + 1;
-	
+
 	cimg_library::CImg<float> cImage(width, m_measurements.size());
 	cImage.fill(0);
 	float* image = cImage.data();
-	
+
 	for (size_t i = 0; i < m_measurements.size(); i++) {
 		const MeasurementPoint* mp = m_measurements[i];
 
 		size_t thr = static_cast<size_t>(std::floor(mp->getDiameter() * 2 / m_data->getVoxelSize()));
 		size_t pos = i * width;
-		
+
 		for (size_t j = 0; j < m_settings.getNumNormalsAtPoint(); ++j) {
 			const std::vector<float>& n = mp->getNormal(j);
 
@@ -252,7 +252,7 @@ void MainWindow::updateMeasurementPoints()
     }
 
 	cImage.rotate(-90, 0, 0);
-	
+
 	// Send measurements and update everything
     ui->plot->setMeasurements(m_measurements);
 
@@ -294,7 +294,7 @@ void MainWindow::reset(bool resetSpline)
 
     ui->plot->setMeasurements(m_measurements);
     ui->plot->setPosition(0);
-    
+
     ui->plot2->setMeasurements(m_measurements);
     ui->plot2->setPosition(0);
 
@@ -315,7 +315,7 @@ void MainWindow::reset(bool resetSpline)
 
 void MainWindow::recalculate(bool recache) {
 	size_t width = (static_cast<double>(m_settings.getSizeNormal()) / m_data->getVoxelSize()) * 2 + 1;
-	
+
 	cimg_library::CImg<float> cImage(width, m_measurements.size());
 	cImage.fill(0);
 	float* image = cImage.data();
@@ -331,14 +331,14 @@ void MainWindow::recalculate(bool recache) {
 
 	// Median-filter measurements
 	MPFilter::median(m_measurements, 3);
-	
+
 	// Create lengthwise profile of the coronary
 	for (size_t i = 0; i < m_measurements.size(); i++) {
 		MeasurementPoint* mp = m_measurements[i];
 
 		size_t thr = static_cast<size_t>(std::floor(mp->getDiameter() * 2 / m_data->getVoxelSize()));
 		size_t pos = i * width;
-		
+
 		for (size_t j = 0; j < m_settings.getNumNormalsAtPoint(); ++j) {
 			const std::vector<float>& n = mp->getNormal(j);
 
@@ -352,7 +352,7 @@ void MainWindow::recalculate(bool recache) {
     }
 
 	cImage.rotate(-90, 0, 0);
-	
+
 	// Send measurements and update everything
     ui->plot->setMeasurements(m_measurements);
 
@@ -381,7 +381,7 @@ void MainWindow::showNormalPlot() {
 		m_normalPlot->setMeasurements(m_measurements);
 		m_normalPlot->setPosition(ui->profile->getPosition());
 	}
-	
+
 	m_normalPlot->show();
 	m_normalPlot->activateWindow();
 	m_normalPlot->raise();
@@ -505,7 +505,7 @@ void MainWindow::configure() {
 		return;
 
 	double e = m_settings.getSharpnessEvalInterval();
-	
+
 	dialog.updateConfig();
 
 	if (fabs(e - m_settings.getSharpnessEvalInterval()) < 1e-7)
@@ -545,7 +545,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
 void MainWindow::about() {
 	QString msg;
 	msg = "CoroEval\n\nA multi-platform, multi-modality evaluation tool for coronary reconstructions.\n\n";
-	msg += "Copyright ©2014, Christoph Forman, Chris Schwemmer & Jens Wetzl.\nPattern Recognition Lab, Universität Erlangen-Nürnberg, Germany.\n\n";
+	msg += "Copyright Â©2014, Christoph Forman, Chris Schwemmer & Jens Wetzl.\nPattern Recognition Lab, UniversitÃ¤t Erlangen-NÃ¼rnberg, Germany.\n\n";
 	msg += "This software is licensed under the GNU General Public License. For more details see license.txt.\n\n";
     msg += "If you use CoroEval in your research, please cite its companion publication as follows:\nCoroEval: a multi-platform, multi-modality tool for the evaluation of 3D coronary vessel reconstructions.\nC Schwemmer, C Forman, J Wetzl, A Maier and J Hornegger.\nPhys. Med. Biol. 59 (2014) 5163-5174.";
 

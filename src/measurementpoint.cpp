@@ -277,7 +277,7 @@ bool MeasurementPoint::isPointOk(size_t num, Interval::Position p) const
 
     double radius = getDiameter() / m_data->getVoxelSize() / 2.0;
     double thresRadius = 1.0;
-    if( abs((get50PointInVolume(num, p)-m_betterPvolume).Length()-radius) < thresRadius )
+    if( qAbs((get50PointInVolume(num, p)-m_betterPvolume).Length()-radius) < thresRadius )
         return true;
     return false;
 }
@@ -826,8 +826,6 @@ double MeasurementPoint::fitEllipse() const {
 	double tvCentre = -Av / (2.0 * Avv);
 
 	double wCentre = par[5] - Auu * tuCentre * tuCentre - Avv * tvCentre * tvCentre;
-	double uCentre = tuCentre * cost - tvCentre * sint;
-	double vCentre = tuCentre * sint + tvCentre * cost;
 
 	double Ru = -wCentre / Auu;
 	double Rv = -wCentre / Avv;

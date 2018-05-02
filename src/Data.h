@@ -1,17 +1,17 @@
-/* 
+/*
  * CoroEval
  *
  * An evaluation tool for coronary artery reconstructions.
  *
- * Copyright © 2014:
+ * Copyright Â© 2014:
  *
- * Christoph Forman, Universität Erlangen-Nürnberg
+ * Christoph Forman, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * christoph.forman@cs.fau.de
  *
- * Chris Schwemmer, Universität Erlangen-Nürnberg
+ * Chris Schwemmer, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * chris.schwemmer@cs.fau.de
  *
- * Jens Wetzl, Universität Erlangen-Nürnberg
+ * Jens Wetzl, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * jens.wetzl@cs.fau.de
  *
  * CoroEval is free software: you can redistribute it and/or modify
@@ -39,8 +39,8 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
-#include "wm3/Wm3Vector3.h"
-#include "wm3/Wm3Matrix3.h"
+#include "Wm3Vector3.h"
+#include "Wm3Matrix3.h"
 
 #define cimg_display 0
 #include "CImg.h"
@@ -49,7 +49,7 @@
 #define MIN(a,b) (a < b ? a : b)
 #endif
 
-class Data 
+class Data
 {
 public:
     enum Dim {
@@ -120,4 +120,3 @@ inline bool Data::hasSameSliceSize(const Data &other) const
 }
 
 #endif
-

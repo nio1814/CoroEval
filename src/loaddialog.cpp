@@ -56,8 +56,8 @@
 
 
 LoadDialog::LoadDialog(QWidget* parent) :
-	m_settings(Settings::getSettings()),
     QDialog(parent),
+    m_settings(Settings::getSettings()),
     ui(new Ui::LoadDialog)
 {
     ui->setupUi(this);
@@ -414,7 +414,6 @@ void LoadDialog::loadDicomDir() {
 	data->setData(new float[data->size()]);
 	data->setVoxelSize(voxSize);
 
-	size_t dataSize = data->size();
 	sliceOffset = dims[0] * dims[1];
 			
 	// Store the first slice
@@ -442,9 +441,6 @@ void LoadDialog::loadDicomDir() {
 		}
 
 		const gdcm::Image& image = reader.GetImage();
-		unsigned int ndim2 = image.GetNumberOfDimensions();
-		const unsigned int* dims2 = image.GetDimensions();
-		const double* voxSize2 = image.GetSpacing();
 		gdcm::PixelFormat pixeltype = image.GetPixelFormat();
 
 		if ((ndim != 2) || (voxSizeP[0] != voxSizeP[1]) || /*(voxSizeP[0] != voxSizeSlices) ||*/ (pixeltype.GetBitsAllocated() > 32)) {
@@ -539,7 +535,6 @@ void LoadDialog::loadDicomZIP() {
 			data->setData(new float[data->size()]);
 			data->setVoxelSize(voxSize);
 
-			size_t dataSize = data->size();
 			sliceOffset = dims[0] * dims[1];
 			
 			// Store the first slice
@@ -567,7 +562,6 @@ void LoadDialog::loadDicomZIP() {
 
 			const gdcm::Image& image = reader.GetImage();
 			unsigned int ndim2 = image.GetNumberOfDimensions();
-			const unsigned int* dims2 = image.GetDimensions();
 			const double* voxSize2 = image.GetSpacing();
 			gdcm::PixelFormat pixeltype = image.GetPixelFormat();
 

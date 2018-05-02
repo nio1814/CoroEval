@@ -67,6 +67,8 @@ void Interval::setMinimum(size_t ind, double val, Interval::Position p)
         m_rMinInd = ind;
         m_rMinVal = val;
         break;
+      case Both:
+        break;
     }
 }
 
@@ -79,6 +81,8 @@ void Interval::set20Index(double ind, Interval::Position p)
         break;
     case Interval::Right:
         m_r20Ind = ind;
+        break;
+      case Both:
         break;
     }
 }
@@ -93,6 +97,8 @@ void Interval::set50Index(double ind, Interval::Position p)
     case Interval::Right:
         m_r50Ind = ind;
         break;
+      case Both:
+        break;
     }
 }
 
@@ -105,6 +111,8 @@ void Interval::set80Index(double ind, Interval::Position p)
         break;
     case Interval::Right:
         m_r80Ind = ind;
+        break;
+      case Both:
         break;
     }
 }
@@ -148,6 +156,9 @@ size_t Interval::getMinimumIndex(Interval::Position p) const
     case Interval::Right:
         res = m_rMinInd;
         break;
+      case Both:
+        res = std::min(m_lMinInd, m_rMinInd);
+        break;
     }
     return res;
 }
@@ -162,6 +173,9 @@ double Interval::getMinimumValue(Interval::Position p) const
         break;
     case Interval::Right:
         res = m_rMinVal;
+        break;
+      case Both:
+        res = std::min(m_lMinVal, m_rMinVal);
         break;
     }
     return res;
@@ -178,6 +192,8 @@ double Interval::get80Index(Interval::Position p) const
     case Interval::Right:
         res = m_r80Ind;
         break;
+    case Both:
+        break;
     }
     return res;
  }
@@ -193,6 +209,8 @@ double Interval::get50Index(Interval::Position p) const
     case Interval::Right:
         res = m_r50Ind;
         break;
+    case Both:
+        break;
     }
     return res;
  }
@@ -207,6 +225,8 @@ double Interval::get20Index(Interval::Position p) const
         break;
     case Interval::Right:
         res = m_r20Ind;
+        break;
+    case Both:
         break;
     }
     return res;

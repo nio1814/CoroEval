@@ -42,8 +42,8 @@
 
 
 CoronaryProfile::CoronaryProfile(QWidget *parent) :
-	m_settings(Settings::getSettings()),
     QWidget(parent),
+    m_settings(Settings::getSettings()),
     ui(new Ui::CoronaryProfile)
 {
     ui->setupUi(this);

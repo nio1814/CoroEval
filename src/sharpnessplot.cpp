@@ -50,8 +50,8 @@
 
 
 SharpnessPlot::SharpnessPlot(QWidget* parent) :
-	m_settings(Settings::getSettings()),
-    QWidget(parent)
+    QWidget(parent),
+    m_settings(Settings::getSettings())
 {
     m_plot = new PlotWidget(this);
     m_plot->setStyleSheet("background-color: black;");
@@ -184,6 +184,9 @@ void SharpnessPlot::saveData() {
 		case Diameter:
 			msg = "Save diameter measurements";
 			break;
+    case Stenosis:
+      msg = "Save stenosis measurments";
+      break;
 	}
 
 	QString fileName = QFileDialog::getSaveFileName(this,

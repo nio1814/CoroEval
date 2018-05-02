@@ -374,7 +374,7 @@ void VesselSharpness::findExtrema()
                 curInt.setMinimum(minPoints.at(j), m_normal.at(minPoints.at(j)), Interval::Right );
                 
 				bool noLeft = false;
-				for (size_t k = j - 1; k >= 0; --k) {
+        for (int k = j - 1; k >= 0; --k) {
 					if (minPoints[k] < maxPoints[i] - minDist) {
 						curInt.setMinimum(minPoints[k], m_normal.at(minPoints[k]), Interval::Left );
 						break;
@@ -448,7 +448,7 @@ void VesselSharpness::findExtrema()
     double centerDist = center;
     for(size_t i=0; i<allIntervals.size(); i++)
     {
-        double dist = abs(double(allIntervals.at(i).getMaximumIndex()) - center);
+        double dist = qAbs(double(allIntervals.at(i).getMaximumIndex()) - center);
         if(dist < centerDist)
         {
             centerDist = dist;

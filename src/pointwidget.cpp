@@ -162,9 +162,9 @@ private:
 
 
 
-PointWidget::PointWidget(QWidget* parent)
-	:	m_settings(Settings::getSettings()),
+PointWidget::PointWidget(QWidget* parent) :
 		QDialog(parent),
+    m_settings(Settings::getSettings()),
 		ui(new Ui::PointWidget)
 {
     ui->setupUi(this);

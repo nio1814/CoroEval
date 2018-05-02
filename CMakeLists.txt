@@ -75,7 +75,7 @@ INCLUDE_DIRECTORIES(
     ${libzip_INCLUDE_DIRS}
     ${CoroEval_BINARY_DIR}
     ${CoroEval_SOURCE_DIR}/src
-    ${CoroEval_SOURCE_DIR}/src/wm3
+    ${CoroEval_SOURCE_DIR}/wm3
 )
 
 IF(WIN32)
@@ -86,63 +86,6 @@ ENDIF(WIN32)
 
 # Source setup
 
-SET(WM3_HDRS
-    src/wm3/Wm3Vector2.h
-    src/wm3/Wm3Vector3.h
-    src/wm3/Wm3Vector4.h
-    src/wm3/Wm3GVector.h
-    src/wm3/Wm3TTuple.h
-    src/wm3/Wm3TStack.h
-    src/wm3/Wm3TSet.h
-    src/wm3/Wm3TList.h
-    src/wm3/Wm3THashTable.h
-    src/wm3/Wm3THashSet.h
-    src/wm3/Wm3TArray.h
-    src/wm3/Wm3System.h
-    src/wm3/Wm3SingleCurve3.h
-    src/wm3/Wm3Segment3.h
-    src/wm3/Wm3Quaternion.h
-    src/wm3/Wm3Platforms.h
-    src/wm3/Wm3Memory.h
-    src/wm3/Wm3Matrix2.h
-    src/wm3/Wm3Matrix3.h
-    src/wm3/Wm3Matrix4.h
-    src/wm3/Wm3GMatrix.h
-    src/wm3/Wm3Math.h
-    src/wm3/Wm3Line3.h
-    src/wm3/Wm3Integrate1.h
-    src/wm3/Wm3FoundationLIB.h
-    src/wm3/Wm3Curve3.h
-    src/wm3/Wm3BSplineFitBasis.h
-    src/wm3/Wm3BSplineFit.h
-    src/wm3/Wm3BSplineCurve3.h
-    src/wm3/Wm3BSplineBasis.h
-    src/wm3/Wm3BandedMatrix.h
-    src/wm3/Wm3Eigen.h
-	src/wm3/Wm3NoniterativeEigen3x3.h
-)
-
-SET(WM3_SRCS
-    src/wm3/Wm3Vector2.cpp
-    src/wm3/Wm3Vector3.cpp
-    src/wm3/Wm3Vector4.cpp
-    src/wm3/Wm3System.cpp
-    src/wm3/Wm3SingleCurve3.cpp
-    src/wm3/Wm3Quaternion.cpp
-    src/wm3/Wm3Memory.cpp
-    src/wm3/Wm3Matrix2.cpp
-    src/wm3/Wm3Matrix3.cpp
-    src/wm3/Wm3Matrix4.cpp
-    src/wm3/Wm3Math.cpp
-    src/wm3/Wm3Integrate1.cpp
-    src/wm3/Wm3Curve3.cpp
-    src/wm3/Wm3BSplineFitBasis.cpp
-    src/wm3/Wm3BSplineFit.cpp
-    src/wm3/Wm3BSplineCurve3.cpp
-    src/wm3/Wm3BSplineBasis.cpp
-    src/wm3/Wm3Eigen.cpp
-	src/wm3/Wm3NoniterativeEigen3x3.cpp
-)
 
 SET(CoroEval_HDRS
     src/imagewidget.h
@@ -254,6 +197,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wno-shift-negative-value -std=c++14")
+
 IF(WIN32)
 ADD_EXECUTABLE(CoroEval
     ${WM3_SRCS}
@@ -290,9 +235,10 @@ TARGET_LINK_LIBRARIES(CoroPlot
     ${QT_LIBRARIES}
     ${Qwt-Qt4_LIBRARY}
     ${QWT_LIBRARIES}
+    wm3
 )
 
-target_link_libraries(${PROJECT_NAME} ${QWT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${QWT_LIBRARIES} wm3)
 
 IF(WIN32)
     TARGET_LINK_LIBRARIES(CoroEval
@@ -334,3 +280,5 @@ IF(APPLE)
 	TARGET_LINK_LIBRARIES(CoroEval ${CORE_SERVICES_LIBRARY} ${CARBON_LIBRARY})
 	TARGET_LINK_LIBRARIES(CoroPlot ${CORE_SERVICES_LIBRARY} ${CARBON_LIBRARY})
 ENDIF(APPLE)
+
+add_subdirectory(wm3)
