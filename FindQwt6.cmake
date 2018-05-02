@@ -17,16 +17,18 @@
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
 # Condition is "(A OR B) AND C", CMake does not support parentheses but it evaluates left to right
-IF(Qwt-Qt4_LIBRARY AND Qwt_INCLUDE_DIR)
-    SET(Qwt_FIND_QUIETLY TRUE)
-ENDIF(Qwt-Qt4_LIBRARY AND Qwt_INCLUDE_DIR)
+if (NOT USE_QT5)
+    IF(Qwt-Qt4_LIBRARY AND Qwt_INCLUDE_DIR)
+        SET(Qwt_FIND_QUIETLY TRUE)
+    ENDIF(Qwt-Qt4_LIBRARY AND Qwt_INCLUDE_DIR)
 
-FIND_PACKAGE( Qt4 REQUIRED QUIET )
+    FIND_PACKAGE( Qt4 REQUIRED QUIET )
 
-IF( QT4_FOUND )
-	# Is Qwt installed? Look for header files
-	FIND_PATH( Qwt_INCLUDE_DIR qwt.h PATHS ${QT_INCLUDE_DIR} /usr/local/Cellar/qwt/6.1.0/lib/qwt.framework/Versions/6/Headers PATH_SUFFIXES qwt qwt6 qwt-qt4 qwt6-qt4 include qwt/include qwt6/include qwt-qt4/include qwt6-qt4/include ENV PATH)
-	
+    IF( QT4_FOUND )
+      # Is Qwt installed? Look for header files
+      FIND_PATH( Qwt_INCLUDE_DIR qwt.h PATHS ${QT_INCLUDE_DIR} /usr/local/Cellar/qwt/6.1.0/lib/qwt.framework/Versions/6/Headers PATH_SUFFIXES qwt qwt6 qwt-qt4 qwt6-qt4 include qwt/include qwt6/include qwt-qt4/include qwt6-qt4/include ENV PATH)
+endif(NOT USE_QT5)
+      
 	# Find Qwt version
 	IF( Qwt_INCLUDE_DIR )
 		FILE( READ ${Qwt_INCLUDE_DIR}/qwt_global.h QWT_GLOBAL_H )

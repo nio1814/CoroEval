@@ -33,11 +33,20 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 SET(CMAKE_MODULE_PATH ${CoroEval_SOURCE_DIR})
 
 # Requirements
+find_package(Qt5Widgets)
+if (Qt5Widgets_FOUND)
+    set(QT_LIBRARIES Qt5::Widgets)
+    set(USE_QT5 ON)
+    find_package(Qwt REQUIRED)
+    INCLUDE_DIRECTORIES(${QWT_INCLUDE_DIRS})
+else()
+    set(USE_QT5 OFF)
+    find_package(Qt4 REQUIRED)
+    include(${QT_USE_FILE})
+    add_definitions(${QT_DEFINITIONS})
+    FIND_PACKAGE(Qwt6 REQUIRED)
+endif()
 
-FIND_PACKAGE(Qt4 REQUIRED)
-INCLUDE(${QT_USE_FILE})
-
-FIND_PACKAGE(Qwt6 REQUIRED)
 
 FIND_PACKAGE(LibZip REQUIRED)
 
@@ -200,36 +209,6 @@ IF(ENABLE_MESH_EXPORT)
 	)
 ENDIF(ENABLE_MESH_EXPORT)
 
-QT4_WRAP_UI(CoroEval_UIS_H
-    src/imagewidget.ui
-    src/orthoWidget.ui
-    src/coronaryprofile.ui
-	src/coronaryprofile2.ui
-    src/mainwindow.ui
-    src/loaddialog.ui
-    src/pointwidget.ui
-    src/evaluationdialog.ui
-    src/truncatedialog.ui
-    src/settingsdialog.ui
-)
-
-SET(CoroEval_MOC_SRCS
-    src/coronaryprofile.h
-	src/coronaryprofile2.h
-	src/imagelabel.h
-    src/imagewidget.h
-    src/loaddialog.h
-    src/mainwindow.h
-    src/normalplot.h
-    src/orthoviewer.h
-    src/PlotWidget.h
-    src/sharpnessplot.h
-    src/pointwidget.h
-    src/evaluationdialog.h
-    src/mipdialog.h
-    src/truncatedialog.h
-    src/settingsdialog.h
-)
 
 
 SET(CoroEval_RCS
@@ -270,17 +249,10 @@ SET(CoroPlot_MOC_SRCS
     src/evaldialog.h
 )
 
-QT4_WRAP_CPP(MOC_CXX
-    ${CoroEval_MOC_SRCS}
-)
 
-QT4_WRAP_CPP(MOC_CXX2
-    ${CoroPlot_MOC_SRCS}
-)
-
-QT4_ADD_RESOURCES(CoroEval_RCS_CXX
-    ${CoroEval_RCS}
-)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 IF(WIN32)
 ADD_EXECUTABLE(CoroEval
@@ -301,7 +273,7 @@ ADD_EXECUTABLE(CoroEval
     ${CoroEval_HDRS}
     ${CoroEval_UIS_H}
     ${MOC_CXX}
-    ${CoroEval_RCS_CXX}
+    ${CoroEval_RCS}
 )
 ENDIF(WIN32)
 
@@ -317,7 +289,10 @@ ADD_EXECUTABLE(CoroPlot
 TARGET_LINK_LIBRARIES(CoroPlot
     ${QT_LIBRARIES}
     ${Qwt-Qt4_LIBRARY}
+    ${QWT_LIBRARIES}
 )
+
+target_link_libraries(${PROJECT_NAME} ${QWT_LIBRARIES})
 
 IF(WIN32)
     TARGET_LINK_LIBRARIES(CoroEval
@@ -339,19 +314,8 @@ IF(WIN32)
     )
 ELSE(WIN32)
     TARGET_LINK_LIBRARIES(CoroEval
-        gdcmCommon
-        gdcmDICT
-        gdcmDSED
-        gdcmIOD
         gdcmMSFF
-        gdcmzlib
-        gdcmexpat
-        gdcmuuid
-        gdcmjpeg8
-        gdcmjpeg12
-        gdcmjpeg16
-        gdcmopenjpeg
-        gdcmcharls
+        gdcmopenjp2
         ${QT_LIBRARIES}
         ${Qwt-Qt4_LIBRARY}
         ${libzip_LIBRARY}
