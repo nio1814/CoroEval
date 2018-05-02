@@ -1,0 +1,275 @@
+/* 
+ * CoroEval
+ *
+ * An evaluation tool for coronary artery reconstructions.
+ *
+ * Copyright © 2014:
+ *
+ * Christoph Forman, Universität Erlangen-Nürnberg
+ * christoph.forman@cs.fau.de
+ *
+ * Chris Schwemmer, Universität Erlangen-Nürnberg
+ * chris.schwemmer@cs.fau.de
+ *
+ * Jens Wetzl, Universität Erlangen-Nürnberg
+ * jens.wetzl@cs.fau.de
+ *
+ * CoroEval is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * CoroEval is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with CoroEval.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+* {
+    color: #fff;
+}
+
+QAbstractScrollArea {
+	border: 1px solid transparent;
+}
+
+QPushButton {
+    color: #fff; 
+    border: 2px solid #111; 
+    border-radius: 10px; 
+    padding: 2px; 
+    background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4, radius: 1.35,
+                                stop: 0 #888, stop: 1 #444); 
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    color: #000; 
+    background: qradialgradient(cx: 0.3, cy: -0.4,fx: 0.3, fy: -0.4,radius: 1.35,
+                                stop: 0 #fff, stop: 1 #bbb);
+}
+
+QPushButton:pressed {
+    color: #000; 
+    background: qradialgradient(cx: 0.4, cy: -0.1,fx: 0.4, fy: -0.1,radius: 1.35, 
+                                stop: 0 #fff, stop: 1 #ddd);
+}
+QPushButton:down {
+   color: #000;
+}
+
+QPushButton:disabled {
+	color: #888;
+}
+
+QHeaderView {
+	border: 1px solid black;
+}
+
+QHeaderView::section {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #888, stop: 1 #444);
+    border: 1px solid transparent; 
+    min-height: 20; 
+    padding-left: 4px;
+}
+
+QTableView {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 1 #444, stop: 0 #000); 
+    alternate-background-color: #555;
+	border: 1px solid transparent;
+}
+
+QTabWidget::pane {
+    border: 2px solid #444;
+    border-radius: 10px; 
+    position: absolute;
+    top: -10px;
+    background-color: #000;
+}
+
+QTabWidget::tab-bar {
+	alignment: center;
+}
+
+QTabBar::tab {
+     background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4, radius: 1.35,
+                                stop: 0 #888, stop: 1 #444);
+     border: 1px solid #111;
+     border-bottom-color: #000; /* same as the pane color */
+     min-width: 80px;
+     padding: 2px;
+     color: #fff;
+}
+
+QTabBar::tab:first {
+	border: 2px solid transparent;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius:10px;
+}
+
+QTabBar::tab:last {
+	border: 2px solid transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius:10px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    color: #000; 
+    background: qradialgradient(cx: 0.3, cy: -0.4,fx: 0.3, fy: -0.4,radius: 1.35,
+                                stop: 0 #fff, stop: 1 #bbb);
+}
+
+QLineEdit {
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 2px;
+    background: #666;
+    selection-background-color: #888;
+    color: #fff;
+}
+
+QDoubleSpinBox {
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 2px;
+    background: #666;
+    selection-background-color: #888;
+    color: #fff;  
+}
+
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
+	border: 1px solid transparent;
+}
+
+QDoubleSpinBox::up-arrow, QDoubleSpinBox::up-arrow::disabled {
+	border-image: url(:/res/arrow_up.png);
+	width: 7px;
+	height: 7px;
+	color: white;
+}
+
+QDoubleSpinBox::down-arrow, QDoubleSpinBox::down-arrow::disabled {
+	border-image: url(:/res/arrow_down.png);
+	width: 7px;
+	height: 7px;
+	color: white;
+}
+
+QSpinBox {
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 2px;
+    background: #666;
+    selection-background-color: #888;
+    color: #fff;  
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+	border: 1px solid transparent;
+}
+
+QSpinBox::up-arrow, QSpinBox::up-arrow::disabled {
+	border-image: url(:/res/arrow_up.png);
+	width: 7px;
+	height: 7px;
+	color: white;
+}
+
+QSpinBox::down-arrow, QSpinBox::down-arrow::disabled {
+	border-image: url(:/res/arrow_down.png);
+	width: 7px;
+	height: 7px;
+	color: white;
+}
+
+
+QComboBox 
+{  
+    color: #000;
+} 
+
+QSlider::groove:horizontal {
+	background-image: url(:/res/slider_groove.png);
+	background-repeat: repeat-x;
+	background-position:center; 
+	margin:0px;
+	border:0px;
+	padding:0px;
+}
+
+QSlider::handle:horizontal {
+    border: 2px solid #111; 
+    border-radius: 5px; 
+    background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4, radius: 1.35,
+                                stop: 0 #888, stop: 1 #444); 
+	margin-top: -2px;
+	margin-bottom: -2px;
+	width: 15px;
+}
+
+QCheckBox {
+    spacing: 5px;
+}
+
+QCheckBox::indicator {
+     width: 17px;
+     height: 17px;
+}
+
+QCheckBox::indicator:unchecked {
+     image: url(:/res/checkbox_unchecked.png);
+ }
+
+QCheckBox::indicator:checked {
+     image: url(:/res/checkbox_checked.png);
+ }
+
+QDialog {
+	background-color: #000;
+ }
+
+QMenuBar {
+	/*background-color: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4, radius: 1.35,
+                                stop: 0 #888, stop: 1 #444);*/
+	background-color: #000;
+}
+
+QMenuBar::item {
+	background: transparent;
+}
+
+QMenuBar::item:selected {
+	color: #000;
+	background: qradialgradient(cx: 0.3, cy: -0.4,fx: 0.3, fy: -0.4,radius: 1.35,
+                                stop: 0 #fff, stop: 1 #bbb);
+}
+
+QMenuBar::item:pressed {
+	color: #000;
+	background: qradialgradient(cx: 0.4, cy: -0.1,fx: 0.4, fy: -0.1,radius: 1.35, 
+                                stop: 0 #fff, stop: 1 #ddd);
+}
+
+QMenu {
+	background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4, radius: 1.35,
+                                stop: 0 #888, stop: 1 #444);
+}
+
+QMenu::item:selected {
+	color: #000;
+	background: qradialgradient(cx: 0.3, cy: -0.4,fx: 0.3, fy: -0.4,radius: 1.35,
+                                stop: 0 #fff, stop: 1 #bbb);
+}
+
+QMenu::item:pressed {
+	color: #000;
+	background: qradialgradient(cx: 0.4, cy: -0.1,fx: 0.4, fy: -0.1,radius: 1.35, 
+                                stop: 0 #fff, stop: 1 #ddd);
+}
+
+QMenu::item:disabled {
+	color: #888;
+}
