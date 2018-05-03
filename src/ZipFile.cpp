@@ -66,7 +66,7 @@ ZipFile::~ZipFile() {
 		zip_close(m_zip);
 }
 
-void ZipFile::loadFile(zip_uint64_t index, char*& buffer, zip_uint64_t& bufferLength) {
+void ZipFile::loadFile(zip_int64_t index, char*& buffer, zip_int64_t& bufferLength) {
 	if (!m_zip)
 		throw std::runtime_error("ZipFile::loadFile(): No ZIP file open");
 

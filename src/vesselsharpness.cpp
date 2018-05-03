@@ -1,4 +1,4 @@
-/* 
+/*
  * CoroEval
  *
  * An evaluation tool for coronary artery reconstructions.
@@ -254,7 +254,7 @@ void VesselSharpness::findExtrema()
 	// If the global maximum is not in the list, add it
 	bool globalMaxFound = false;
 	for (size_t i = 0; i < maxPoints.size(); i++) {
-		if (std::abs(static_cast<int>(maxPoints[i]) - static_cast<int>(globalMaxPos)) < kernelSize) {
+    if (std::abs(maxPoints[i] - globalMaxPos) < kernelSize) {
 			globalMaxFound = true;
 			break;
 		}

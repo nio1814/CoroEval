@@ -3,15 +3,15 @@
  *
  * An evaluation tool for coronary artery reconstructions.
  *
- * Copyright © 2014:
+ * Copyright Â© 2014:
  *
- * Christoph Forman, Universität Erlangen-Nürnberg
+ * Christoph Forman, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * christoph.forman@cs.fau.de
  *
- * Chris Schwemmer, Universität Erlangen-Nürnberg
+ * Chris Schwemmer, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * chris.schwemmer@cs.fau.de
  *
- * Jens Wetzl, Universität Erlangen-Nürnberg
+ * Jens Wetzl, UniversitÃ¤t Erlangen-NÃ¼rnberg
  * jens.wetzl@cs.fau.de
  *
  * CoroEval is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ public:
 
 	zip_int64_t nEntries() const { return m_nEntries; }
 
-	void loadFile(zip_uint64_t index, char*& buffer, zip_uint64_t& bufferLength);
+  void loadFile(zip_int64_t index, char*& buffer, zip_int64_t &bufferLength);
 	
 private:
 	zip* m_zip;

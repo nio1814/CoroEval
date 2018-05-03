@@ -78,7 +78,7 @@ Data* loadRawFile(char* filename, size_t sizeX, size_t sizeY, size_t sizeZ, doub
     in.read((char*)d, size*sizeof(unsigned short));
 	in.close();
 
-	if (!in.good() || in.fail() || (in.gcount() != size * sizeof(unsigned short))) {
+  if (!in.good() || in.fail() || ((size_t)in.gcount() != size * sizeof(unsigned short))) {
 		std::cerr << "Error reading file: Could not read from data file" << std::endl;
 		delete [] data->data0();
 		delete data;

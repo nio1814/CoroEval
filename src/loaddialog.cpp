@@ -212,7 +212,7 @@ void LoadDialog::loadRaw() {
         unsigned short* d = new unsigned short[size];
         in.read((char*)d, size*sizeof(unsigned short));
 				
-		if (!in.good() || in.fail() || (in.gcount() != size * sizeof(unsigned short))) {
+    if (!in.good() || in.fail() || ((size_t)in.gcount() != size * sizeof(unsigned short))) {
 			QMessageBox::critical(NULL, "Error reading file", "Could not read from data file");
 
 			in.close();
@@ -231,7 +231,7 @@ void LoadDialog::loadRaw() {
         // is Float
         in.read((char*)data->data0(), size*sizeof(float));
 				
-		if (!in.good() || in.fail() || (in.gcount() != size * sizeof(float))) {
+    if (!in.good() || in.fail() || ((size_t)in.gcount() != size * sizeof(float))) {
 			QMessageBox::critical(NULL, "Error reading file", "Could not read from data file");
 
 			in.close();
@@ -310,7 +310,7 @@ void LoadDialog::loadCavarev() {
 	unsigned char* d = new unsigned char[dataSize];
 	in.read(reinterpret_cast<char*>(d), dataSize);
 
-	if (!in.good() || in.fail() || (in.gcount() != dataSize)) {
+  if (!in.good() || in.fail() || ((size_t)in.gcount() != dataSize)) {
 		QMessageBox::critical(NULL, "Error reading file", "Could not read from data file");
 
 		delete [] data->data0();
@@ -483,7 +483,7 @@ void LoadDialog::loadDicomZIP() {
 			throw std::runtime_error("ZIP file does not contain any slices");
 
 		char* tmpBuf;
-		zip_uint64_t bufLen;
+    zip_int64_t bufLen;
 
 		unsigned int ndim;
 		unsigned int dims[2];
@@ -546,7 +546,7 @@ void LoadDialog::loadDicomZIP() {
 		}
 
 		// Load remaining slices
-		for (zip_uint64_t i = 1; i < zip.nEntries(); ++i) {
+    for (zip_int64_t i = 1; i < zip.nEntries(); ++i) {
 			// Free memory from previous slice
 			delete[] tmpBuf;
 

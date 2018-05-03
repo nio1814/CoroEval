@@ -39,6 +39,7 @@ if (Qt5Widgets_FOUND)
     set(USE_QT5 ON)
     find_package(Qwt REQUIRED)
     INCLUDE_DIRECTORIES(${QWT_INCLUDE_DIRS})
+    INCLUDE_DIRECTORIES(${Qt5Widgets_INCLUDE_DIRS})
 else()
     set(USE_QT5 OFF)
     find_package(Qt4 REQUIRED)
@@ -49,7 +50,7 @@ endif()
 
 
 FIND_PACKAGE(LibZip REQUIRED)
-
+find_package(Threads)
 FIND_PACKAGE(GDCM REQUIRED)
 INCLUDE(${GDCM_USE_FILE})
 
@@ -158,18 +159,6 @@ SET(CoroEval_RCS
     src/resource.qrc
 )
 
-SET(CoroPlot_HDRS
-    src/Data.h
-    src/CImg.h
-    src/bsplineinterpolation.h
-    src/vesselsharpness.h
-    src/measurementpoint.h
-    src/Interval.h
-    src/settings.h
-    src/normalplot.h
-    src/PlotWidget.h
-    src/evaldialog.h
-)
 
 SET(CoroPlot_SRCS
     src/Data.cpp
@@ -185,19 +174,13 @@ SET(CoroPlot_SRCS
     src/evaldialog.cpp
 )
 
-SET(CoroPlot_MOC_SRCS
-    src/imagelabel.h
-    src/normalplot.h
-    src/PlotWidget.h
-    src/evaldialog.h
-)
 
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wno-shift-negative-value -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wno-shift-negative-value -Wno-deprecated -std=c++14 -fPIC")
 
 IF(WIN32)
 ADD_EXECUTABLE(CoroEval
@@ -236,9 +219,17 @@ TARGET_LINK_LIBRARIES(CoroPlot
     ${Qwt-Qt4_LIBRARY}
     ${QWT_LIBRARIES}
     wm3
+    ${CMAKE_THREAD_LIBS_INIT}
 )
 
-target_link_libraries(${PROJECT_NAME} ${QWT_LIBRARIES} wm3)
+target_link_libraries(${PROJECT_NAME}
+    ${QT_LIBRARIES}
+    ${QWT_LIBRARIES}
+    ${libzip_LIBRARY}
+    ${CMAKE_THREAD_LIBS_INIT}
+    wm3
+    gdcmMSFF
+)
 
 IF(WIN32)
     TARGET_LINK_LIBRARIES(CoroEval
@@ -258,13 +249,12 @@ IF(WIN32)
         ${Qwt-Qt4_LIBRARY}
         ${libzip_LIBRARY}
     )
-ELSE(WIN32)
+ELSEIF(APPLE)
     TARGET_LINK_LIBRARIES(CoroEval
-        gdcmMSFF
         gdcmopenjp2
-        ${QT_LIBRARIES}
+
         ${Qwt-Qt4_LIBRARY}
-        ${libzip_LIBRARY}
+
     )
 ENDIF(WIN32)
 
